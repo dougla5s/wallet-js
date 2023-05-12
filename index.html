@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <title>Wallet</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1 style="margin-left: 2vmin; margin-top: 2vmin;">Wallet</h1>
+        <div class="wallet">
+            <div class="diagram">
+                <h1 style="margin-bottom: 2vmin;">Диаграма расходов</h1>
+                <div class="chart" style="margin-bottom: 5vmin;">
+                </div>
+                <ul class="chart__ul">
+                    <li class="chart__elem">
+                        <div class="elem__perc" style="background-color: yellow;"></div>
+                        <p>Элемент</p>
+                        <div class="sum">2022$</div>
+                    </li>
+                    <li class="chart__elem">
+                        <div class="elem__perc" style="background-color: red;"></div>
+                        <p>Элемент</p>
+                        <div class="sum">2022$</div>
+                    </li>
+                    <li class="chart__elem">
+                        <div class="elem__perc" style="background-color: aqua;"></div>
+                        <p>Элемент</p>
+                        <div class="sum">2022$</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="list">
+                <div class="list__table">
+                        <div class="row">
+                            <div class="list__item">Наименование</div>
+                            <div class="list__item">Категория</div>
+                            <div class="list__item">Цена</div>
+                        </div>
+                        <div class="item" style="border-left-color: white;">
+                            <div class="list__item">Снееееееег</div>
+                            <div class="list__item">Еда</div>
+                            <div class="list__item">224242245$</div>
+                            <i style="cursor:pointer" class="fa-solid fa-xmark"></i>
+                        </div>
+                        <div class="item" style="border-left-color: red;">
+                            <div class="list__item">Огонь</div>
+                            <div class="list__item">Напитка</div>
+                            <div class="list__item">2552552$</div>
+                            <i style="cursor:pointer" class="fa-solid fa-xmark"></i>
+                        </div>
+                        <div class="item" style="border-left-color: aqua;">
+                            <div class="list__item">Вода</div>
+                            <div class="list__item">Напитка</div>
+                            <div class="list__item">25$</div>
+                            <i style="cursor:pointer" class="fa-solid fa-xmark"></i>
+                        </div>
+                </div>
+            </div>
+
+            <div class="add">
+                <form class="form">
+                    <p>Товар:</p>
+                    <input id="inputname" type="text" placeholder="Название товара">
+                    <p>Цена:</p>
+                    <input id="inputprice" type="text" placeholder="Цена">
+                    <p>Категория:</p>
+                    <select name="select" id="select">
+                        <option>Продукты</option>
+                        <option>Недвижимость</option>
+                    </select>
+                    <button id="addBtn">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
