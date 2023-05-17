@@ -45,9 +45,10 @@ body {
 }
 
 .chart {
-    background: conic-gradient(#f15854 4%, #4d4d4d 0 25%, #b276b2 0 65%, #faa43a 0);
+    background: gray;
     padding-top: 32vmin;
     width: 32vmin;
+    margin-bottom: 2vmin;
     border-radius: 50%;
 }
 

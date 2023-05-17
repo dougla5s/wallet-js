@@ -9,14 +9,12 @@ let addBtn = document.querySelector('#addBtn')
 let form = document.querySelector('.form')
 
 let items = []
-
 const CATEGORY = {
     'ФастФуд':'orange',
     'Спорт':'aqua',
     'Напитки':'pink',
     'Продукты':'green'
 }
-
 if (localStorage.getItem('items')) {
     items = JSON.parse(localStorage.getItem('items'))
 }
@@ -30,14 +28,13 @@ items.forEach(item => {
             <i style="cursor:pointer" class="fa-solid fa-xmark"></i>
         </div>`)
     createCategory(item)
+    postDiagram()
 });
-
-
 
 listtable.addEventListener('click', e=>{
     if (e.target.classList.contains('fa-xmark')) {
       removeItem(e.target)
-
+      postDiagram()
       writeLocal()
     } 
 })
@@ -72,7 +69,7 @@ function createItem(product, category, price) {
     items.push(newItem)
 
     createCategory(newItem)
-
+    postDiagram()
     writeLocal()
 
     form.inputname.value = ''
@@ -81,6 +78,7 @@ function createItem(product, category, price) {
 }
 
 function createCategory(obj) {
+
     if (!chartul.children.length == 0) {
         let chartelems = document.getElementsByClassName('chart__elem')
 
@@ -91,38 +89,48 @@ function createCategory(obj) {
             }
         }
         defaultChartElem(obj)
-
     } else {
         defaultChartElem(obj)
     }
-    // postDiagram(chartelems)
 }
 
-function postDiagram(chartelems) {
-    let chartSummary = (e) => {
-        let sum = 0
-        for (let i = 0; i < e.length; i++) {
-            sum += parseFloat(e[i].children[2].textContent.slice(0,-2))
+function postDiagram() {
+    let chartelems = chartul.children
+
+    if (chartelems.length != 0) {
+        findSum = (e) => {
+            let sum = 0
+            for (let i=0; i < e.length; i++) {
+                sum += parseFloat(e[i].children[2].textContent.slice(0,-2))
+            }
+            return sum
+        } 
+
+        let summary = findSum(chartelems)  
+        let arr = []
+        let object = {}
+
+        for (let i = 0; i<chartelems.length; i++) {
+            let color = chartelems[i].children[0].style.backgroundColor
+            if (chartelems.length == 1) {arr.push(`${color}`)}
+            object[i] = parseFloat((chartelems[i].children[2].textContent.slice(0,-2) * 360) / summary)
+
+            if (i == 0) arr.push(`${color} ${object[i]}deg`)
+            else if (i == 1) arr.push(`${color} 0 ${object[i-1]+object[i]}deg`)
+            else if (i == 2) arr.push(`${color} 0 ${object[i-2] + object[i-1]+object[i]}deg`)
+            else if (i == 3) arr.push(`${color} ${object[i-3]+object[i-2]+object[i-1]}deg ${object[i]}deg`)
         }
-        return sum
-    }
+        arr = arr.join(', ')
+        let finchart = `conic-gradient(${arr})`
+        chart.style.background = finchart
 
-    let chartCategoryProportion = (j) => {
-        let proportion
-        
-        let
+    } else {
+        chart.style.background = 'gray'
     }
-
-    const chartparameters = `chartSummary()`
-    chart.style.background = `conic-gradient(${chartparameters})`
 }
 
 function writeLocal() {
     localStorage.setItem('items', JSON.stringify(items))
-}
-
-function writeLocalChart() {
-    localStorage.setItem('chart', chart.style.background)
 }
 
 function removeItem(i) {
